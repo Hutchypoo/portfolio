@@ -506,6 +506,48 @@
       color: var(--text-muted);
     }
 
+    /* ——— AGE TICKER ——— */
+    .age-ticker {
+      margin-top: 3rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .age-unit {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1rem 1.25rem;
+      min-width: 120px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .age-unit:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .age-unit .number {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.02em;
+    }
+
+    .age-unit .label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      margin-top: 0.25rem;
+    }
+
     /* ——— FOOTER ——— */
     footer {
       text-align: center;
@@ -647,6 +689,7 @@
     <h2 class="section-title reveal">Let's Build Something Together</h2>
     <p class="section-desc reveal">I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.</p>
     <div class="contact-links" id="contact-links"></div>
+    <div class="age-ticker reveal" id="age-ticker"></div>
   </section>
 
   <footer>
@@ -755,6 +798,31 @@
         </div>`;
       contactLinks.appendChild(el);
     });
+
+    // ——— AGE TICKER ———
+    const birthday = new Date(2012, 5, 30, 17, 32, 0);
+    const ageContainer = document.getElementById('age-ticker');
+
+    function updateAge() {
+      const now = new Date();
+      const diff = now - birthday;
+
+      const minutes = Math.floor(diff / 60000);
+      const hours = Math.floor(diff / 3600000);
+      const days = Math.floor(diff / 86400000);
+      const months = (now.getFullYear() - birthday.getFullYear()) * 12 + (now.getMonth() - birthday.getMonth());
+      const years = now.getFullYear() - birthday.getFullYear() - (now < new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate(), 17, 32) ? 1 : 0);
+
+      ageContainer.innerHTML = `
+        <div class="age-unit"><div class="number">${years.toLocaleString()}</div><div class="label">Years</div></div>
+        <div class="age-unit"><div class="number">${months.toLocaleString()}</div><div class="label">Months</div></div>
+        <div class="age-unit"><div class="number">${days.toLocaleString()}</div><div class="label">Days</div></div>
+        <div class="age-unit"><div class="number">${hours.toLocaleString()}</div><div class="label">Hours</div></div>
+        <div class="age-unit"><div class="number">${minutes.toLocaleString()}</div><div class="label">Minutes</div></div>`;
+    }
+
+    updateAge();
+    setInterval(updateAge, 1000);
 
     // ——— SCROLL REVEAL ———
     const observer = new IntersectionObserver((entries) => {
