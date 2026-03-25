@@ -807,6 +807,7 @@
       const now = new Date();
       const diff = now - birthday;
 
+      const seconds = Math.floor(diff / 1000);
       const minutes = Math.floor(diff / 60000);
       const hours = Math.floor(diff / 3600000);
       const days = Math.floor(diff / 86400000);
@@ -818,7 +819,8 @@
         <div class="age-unit"><div class="number">${months.toLocaleString()}</div><div class="label">Months</div></div>
         <div class="age-unit"><div class="number">${days.toLocaleString()}</div><div class="label">Days</div></div>
         <div class="age-unit"><div class="number">${hours.toLocaleString()}</div><div class="label">Hours</div></div>
-        <div class="age-unit"><div class="number">${minutes.toLocaleString()}</div><div class="label">Minutes</div></div>`;
+        <div class="age-unit"><div class="number">${minutes.toLocaleString()}</div><div class="label">Minutes</div></div>
+        <div class="age-unit"><div class="number">${seconds.toLocaleString()}</div><div class="label">Seconds</div></div>`;
     }
 
     updateAge();
