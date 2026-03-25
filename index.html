@@ -146,6 +146,15 @@
       position: relative;
     }
 
+    #particles {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     .hero-photo {
       position: relative;
       width: 160px;
@@ -153,12 +162,26 @@
       margin: 0 auto 2rem;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid var(--border);
-      box-shadow: 0 0 0 6px var(--accent-light), var(--shadow-lg);
-      transition: border-color 0.3s, box-shadow 0.3s;
+      padding: 3px;
+      background: conic-gradient(var(--accent), #ec4899, var(--accent));
+      box-shadow: 0 0 20px rgba(99,102,241,0.2), 0 0 60px rgba(99,102,241,0.1);
+      animation: spin-border 4s linear infinite;
     }
 
-    .hero-photo img {
+    @keyframes spin-border {
+      to { transform: rotate(360deg); }
+    }
+
+    .hero-photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg);
+    }
+
+    .hero-photo-inner img {
       position: absolute;
       inset: 0;
       width: 100%;
@@ -168,7 +191,7 @@
       transition: opacity 0.8s ease;
     }
 
-    .hero-photo img.active {
+    .hero-photo-inner img.active {
       opacity: 1;
     }
 
@@ -177,7 +200,7 @@
       position: absolute;
       width: 1000px;
       height: 1000px;
-      background: radial-gradient(circle, var(--accent) 0%, transparent 65%);
+      background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
       opacity: 0.08;
       top: -300px;
       right: -250px;
@@ -266,6 +289,18 @@
     #rotating-text.fade-out {
       opacity: 0;
       transform: translateY(8px);
+    }
+
+    #rotating-text::after {
+      content: '|';
+      margin-left: 2px;
+      animation: blink 1s step-end infinite;
+      color: var(--accent);
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
 
     .hero-buttons {
@@ -704,6 +739,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="particles"></canvas>
     <div class="hero-content">
       <div class="hero-photo reveal" id="hero-photo"></div>
       <div class="hero-badge reveal reveal-delay-1">Available for work</div>
@@ -760,19 +796,23 @@
       "https://i.imgur.com/3nVAfER.jpeg"
     ];
 
-    const photoContainer = document.getElementById('hero-photo');
+    const photoOuter = document.getElementById('hero-photo');
+    const photoInner = document.createElement('div');
+    photoInner.className = 'hero-photo-inner';
+    photoOuter.appendChild(photoInner);
+
     photos.forEach((src, i) => {
       const img = document.createElement('img');
       img.src = src;
       img.alt = "Hutch Steadman";
       if (i === 0) img.classList.add('active');
-      photoContainer.appendChild(img);
+      photoInner.appendChild(img);
     });
 
     let photoIndex = 0;
     if (photos.length > 1) {
       setInterval(() => {
-        const imgs = photoContainer.querySelectorAll('img');
+        const imgs = photoInner.querySelectorAll('img');
         imgs[photoIndex].classList.remove('active');
         photoIndex = (photoIndex + 1) % imgs.length;
         imgs[photoIndex].classList.add('active');
@@ -962,6 +1002,55 @@
     navLinks.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
+
+    // ——— PARTICLES ———
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resizeCanvas() {
+      const hero = document.querySelector('.hero');
+      canvas.width = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+
+    function createParticles() {
+      particles = [];
+      const count = Math.floor((canvas.width * canvas.height) / 12000);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.5 + 0.5,
+          dx: (Math.random() - 0.5) * 0.3,
+          dy: (Math.random() - 0.5) * 0.3,
+          opacity: Math.random() * 0.4 + 0.1
+        });
+      }
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim();
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = accent;
+        ctx.globalAlpha = p.opacity;
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+      });
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(drawParticles);
+    }
+
+    resizeCanvas();
+    createParticles();
+    drawParticles();
+    window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
   </script>
 
 </body>
