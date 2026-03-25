@@ -281,14 +281,6 @@
       font-size: 1.25rem;
       font-weight: 600;
       color: var(--accent);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    #rotating-text.fade-out {
-      opacity: 0;
-      transform: translateY(8px);
     }
 
     #rotating-text::after {
@@ -969,7 +961,7 @@
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
     });
 
-    // ——— ROTATING TEXT ———
+    // ——— ROTATING TEXT (TYPEWRITER) ———
     const roles = [
       "Full-Stack Developer",
       "AI Programmer",
@@ -984,16 +976,40 @@
     ];
     const rotatingEl = document.getElementById('rotating-text');
     let roleIndex = 0;
-    rotatingEl.textContent = roles[0];
+    const typeSpeed = 60;
+    const deleteSpeed = 40;
+    const pauseAfterType = 1800;
+    const pauseAfterDelete = 300;
 
-    setInterval(() => {
-      rotatingEl.classList.add('fade-out');
-      setTimeout(() => {
-        roleIndex = (roleIndex + 1) % roles.length;
-        rotatingEl.textContent = roles[roleIndex];
-        rotatingEl.classList.remove('fade-out');
-      }, 400);
-    }, 2400);
+    function typeText(text, i, cb) {
+      if (i <= text.length) {
+        rotatingEl.textContent = text.substring(0, i);
+        setTimeout(() => typeText(text, i + 1, cb), typeSpeed);
+      } else {
+        setTimeout(cb, pauseAfterType);
+      }
+    }
+
+    function deleteText(cb) {
+      const current = rotatingEl.textContent;
+      if (current.length > 0) {
+        rotatingEl.textContent = current.substring(0, current.length - 1);
+        setTimeout(() => deleteText(cb), deleteSpeed);
+      } else {
+        setTimeout(cb, pauseAfterDelete);
+      }
+    }
+
+    function cycle() {
+      typeText(roles[roleIndex], 0, () => {
+        deleteText(() => {
+          roleIndex = (roleIndex + 1) % roles.length;
+          cycle();
+        });
+      });
+    }
+
+    cycle();
 
     // ——— MOBILE MENU ———
     const menuBtn = document.querySelector('.mobile-menu-btn');
