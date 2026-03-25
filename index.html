@@ -20,6 +20,7 @@
   <meta name="twitter:description" content="Full-stack developer & UI/UX enthusiast crafting fast, accessible, and beautiful web experiences.">
   <meta name="twitter:image" content="https://i.imgur.com/xMoobv2.jpeg">
   <meta name="theme-color" content="#6366f1">
+  <meta name="google-analytics-id" content="G-2P5JMXEL8Z">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,9 +72,61 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(99, 102, 241, 0.14), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(236, 72, 153, 0.12), transparent 30%),
+        radial-gradient(circle at 50% 85%, rgba(129, 140, 248, 0.12), transparent 32%),
+        var(--bg);
+      background-size: 140% 140%;
+      animation: bodyGlowShift 18s ease-in-out infinite;
       transition: background 0.3s, color 0.3s;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    @keyframes bodyGlowShift {
+      0%, 100% { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0; }
+      50% { background-position: 12% 10%, 88% 8%, 48% 92%, 0 0; }
+    }
+
+    .preloader {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 1000;
+      transition: opacity 0.45s ease, visibility 0.45s ease;
+    }
+
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .preloader-ring {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.08);
+      border-top-color: var(--accent);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .preloader-text {
+      color: #fff;
+      letter-spacing: 0.08em;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
     }
 
     /* ——— NAV ——— */
@@ -421,6 +474,28 @@
     .skill-name {
       font-weight: 600;
       font-size: 0.9rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .skill-level {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.55rem;
+    }
+
+    .skill-bar {
+      height: 8px;
+      width: 100%;
+      background: rgba(148, 163, 184, 0.18);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .skill-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), #ec4899);
+      box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
     }
 
     /* ——— PROJECTS ——— */
@@ -438,12 +513,27 @@
       transition: all 0.3s;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     .project-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 18px 46px rgba(99, 102, 241, 0.16), var(--shadow-lg);
       border-color: var(--accent);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.04));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .project-card:hover::before {
+      opacity: 1;
     }
 
     .project-body {
@@ -457,6 +547,12 @@
       font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+
+    .project-card:hover .project-body h3 {
+      transform: translateX(4px);
+      color: var(--accent);
     }
 
     .project-body p {
@@ -641,6 +737,31 @@
       flex-shrink: 0;
     }
 
+    .back-to-top {
+      position: fixed;
+      right: 1.5rem;
+      bottom: 1.5rem;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), #ec4899);
+      color: #fff;
+      cursor: pointer;
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      z-index: 120;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
     /* ——— FOOTER ——— */
     footer {
       text-align: center;
@@ -741,6 +862,10 @@
   </style>
 </head>
 <body>
+  <div class="preloader" id="preloader">
+    <div class="preloader-ring"></div>
+    <div class="preloader-text">Loading hutchy.dev</div>
+  </div>
 
   <!-- NAV -->
   <nav>
@@ -806,6 +931,8 @@
     <p>&copy; 2026 Hutch Steadman &mdash; Built with care and vanilla HTML, CSS &amp; JS</p>
   </footer>
 
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top">&uarr;</button>
+
   <script>
     // ——— PHOTO CAROUSEL ———
     const photos = [
@@ -839,16 +966,16 @@
 
     // ——— DATA ———
     const skills = [
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968509.png" width="32" height="32" alt="JavaScript" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "JavaScript" },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968566.png" width="32" height="32" alt="TypeScript" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "TypeScript" },
-      { icon: '<img src="https://img.icons8.com/?size=100&id=35989&format=png&color=000000" width="32" height="32" alt="React" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "React" },
-      { icon: '<img src="https://img.icons8.com/?size=100&id=FQlr_bFSqEdG&format=png&color=000000" width="32" height="32" alt="Node.js" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Node.js" },
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 255"><path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072ZM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13Z"/><path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897Zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.131 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13Z"/></svg>', name: "Python" },
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M4.882 1.731a.48.48 0 0 1 .14.291.487.487 0 0 1-.371.486 6.5 6.5 0 0 0-1.19.62A7 7 0 0 1 4.882 1.73m6.24.003a7.002 7.002 0 0 1 1.41 1.398 6.5 6.5 0 0 0-1.19-.62.487.487 0 0 1-.371-.486.48.48 0 0 1 .14-.291zM8 3a5 5 0 1 1 0 10A5 5 0 0 1 8 3"/></svg>', name: "AWS" },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968561.png" width="32" height="32" alt="Swift" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Swift" },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968504.png" width="32" height="32" alt="Java" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Java" },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968571.png" width="32" height="32" alt="Visual Studio" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "VS Code" },
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M15.698 7.287 8.712.302a1.03 1.03 0 0 0-1.457 0l-1.45 1.45 1.84 1.84a1.223 1.223 0 0 1 1.55 1.56l1.773 1.774a1.224 1.224 0 1 1-.733.693L8.535 5.918v4.27a1.229 1.229 0 1 1-1.008-.036V5.851a1.224 1.224 0 0 1-.664-1.608L5.093 2.473l-4.79 4.79a1.03 1.03 0 0 0 0 1.457l6.986 6.986a1.03 1.03 0 0 0 1.457 0l6.953-6.953a1.031 1.031 0 0 0 0-1.457z"/></svg>', name: "Git" },
+      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968509.png" width="32" height="32" alt="JavaScript" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "JavaScript", level: 94 },
+      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968566.png" width="32" height="32" alt="TypeScript" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "TypeScript", level: 88 },
+      { icon: '<img src="https://img.icons8.com/?size=100&id=35989&format=png&color=000000" width="32" height="32" alt="React" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "React", level: 91 },
+      { icon: '<img src="https://img.icons8.com/?size=100&id=FQlr_bFSqEdG&format=png&color=000000" width="32" height="32" alt="Node.js" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Node.js", level: 86 },
+      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 255"><path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072ZM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13Z"/><path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897Zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.131 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13Z"/></svg>', name: "Python", level: 89 },
+      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M4.882 1.731a.48.48 0 0 1 .14.291.487.487 0 0 1-.371.486 6.5 6.5 0 0 0-1.19.62A7 7 0 0 1 4.882 1.73m6.24.003a7.002 7.002 0 0 1 1.41 1.398 6.5 6.5 0 0 0-1.19-.62.487.487 0 0 1-.371-.486.48.48 0 0 1 .14-.291zM8 3a5 5 0 1 1 0 10A5 5 0 0 1 8 3"/></svg>', name: "AWS", level: 72 },
+      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968561.png" width="32" height="32" alt="Swift" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Swift", level: 66 },
+      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968504.png" width="32" height="32" alt="Java" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Java", level: 78 },
+      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968571.png" width="32" height="32" alt="Visual Studio" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "VS Code", level: 90 },
+      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M15.698 7.287 8.712.302a1.03 1.03 0 0 0-1.457 0l-1.45 1.45 1.84 1.84a1.223 1.223 0 0 1 1.55 1.56l1.773 1.774a1.224 1.224 0 1 1-.733.693L8.535 5.918v4.27a1.229 1.229 0 1 1-1.008-.036V5.851a1.224 1.224 0 0 1-.664-1.608L5.093 2.473l-4.79 4.79a1.03 1.03 0 0 0 0 1.457l6.986 6.986a1.03 1.03 0 0 0 1.457 0l6.953-6.953a1.031 1.031 0 0 0 0-1.457z"/></svg>', name: "Git", level: 93 },
     ];
 
     const projects = [
@@ -877,7 +1004,11 @@
     skills.forEach((s, i) => {
       const el = document.createElement('div');
       el.className = `skill-card reveal ${i < 5 ? `reveal-delay-${(i % 3) + 1}` : ''}`;
-      el.innerHTML = `<span class="skill-icon">${s.icon}</span><span class="skill-name">${s.name}</span>`;
+      el.innerHTML = `
+        <span class="skill-icon">${s.icon}</span>
+        <span class="skill-name">${s.name}</span>
+        <div class="skill-level">${s.level}%</div>
+        <div class="skill-bar"><div class="skill-fill" style="width: ${s.level}%"></div></div>`;
       skillsGrid.appendChild(el);
     });
 
@@ -987,6 +1118,19 @@
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
     });
 
+    const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content;
+    if (analyticsId && analyticsId !== 'YOUR_GA_MEASUREMENT_ID') {
+      const gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', analyticsId);
+    }
+
     // ——— ROTATING TEXT (TYPEWRITER) ———
     const roles = [
       "Full-Stack Developer",
@@ -1061,6 +1205,14 @@
       });
     });
 
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTop.classList.toggle('visible', window.scrollY > 500);
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     // ——— PARTICLES ———
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
@@ -1109,6 +1261,10 @@
     createParticles();
     drawParticles();
     window.addEventListener('resize', () => { resizeCanvas(); createParticles(); });
+
+    window.addEventListener('load', () => {
+      document.getElementById('preloader')?.classList.add('hidden');
+    });
   </script>
 
 </body>
