@@ -908,7 +908,7 @@
     });
 
     // ——— AGE TICKER ———
-    const birthday = new Date(2012, 5, 30, 17, 32, 0);
+    const birthday = new Date(2012, 5, 30, 15, 27, 0);
     const ageContainer = document.getElementById('age-ticker');
 
     function updateAge() {
@@ -920,7 +920,7 @@
       const hours = Math.floor(diff / 3600000);
       const days = Math.floor(diff / 86400000);
       const months = (now.getFullYear() - birthday.getFullYear()) * 12 + (now.getMonth() - birthday.getMonth());
-      const years = now.getFullYear() - birthday.getFullYear() - (now < new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate(), 17, 32) ? 1 : 0);
+      const years = now.getFullYear() - birthday.getFullYear() - (now < new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate(), 15, 27) ? 1 : 0);
 
       ageContainer.innerHTML = `
         <div class="age-unit"><div class="number">${years.toLocaleString()}</div><div class="label">Years</div></div>
