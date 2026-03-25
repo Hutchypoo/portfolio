@@ -21,6 +21,7 @@
   <meta name="twitter:image" content="https://i.imgur.com/xMoobv2.jpeg">
   <meta name="theme-color" content="#6366f1">
   <meta name="google-analytics-id" content="G-2P5JMXEL8Z">
+  <meta name="formspree-endpoint" content="https://formspree.io/f/xpqozdvp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -626,6 +627,74 @@
       margin-top: 2rem;
     }
 
+    .contact-form-wrap {
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      text-align: left;
+    }
+
+    .contact-form {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-sm);
+      display: grid;
+      gap: 0.85rem;
+    }
+
+    .contact-form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem;
+    }
+
+    .contact-form label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+      display: inline-block;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 0.72rem 0.8rem;
+      font: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .contact-form textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-status {
+      min-height: 1.2rem;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+
+    .form-status.success {
+      color: #16a34a;
+    }
+
+    .form-status.error {
+      color: #dc2626;
+    }
+
     .contact-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
@@ -858,6 +927,10 @@
       .skills-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+
+      .contact-form-row {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -917,6 +990,27 @@
     <p class="section-label reveal">Get in touch</p>
     <h2 class="section-title reveal">Let's Build Something Together</h2>
     <p class="section-desc reveal">I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.</p>
+    <div class="contact-form-wrap reveal">
+      <form id="contact-form" class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="contact-form-row">
+          <div>
+            <label for="contact-name">Name</label>
+            <input id="contact-name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="contact-email">Email</label>
+            <input id="contact-email" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+        <div>
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" required></textarea>
+        </div>
+        <input type="text" name="_gotcha" style="display:none">
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
     <div class="contact-links" id="contact-links"></div>
 
     <div class="socials-section reveal">
@@ -1130,6 +1224,57 @@
       gtag('js', new Date());
       gtag('config', analyticsId);
     }
+
+    const form = document.getElementById('contact-form');
+    const statusEl = document.getElementById('form-status');
+    const formEndpoint = document.querySelector('meta[name="formspree-endpoint"]')?.content || '';
+    if (form && formEndpoint) {
+      form.action = formEndpoint;
+    }
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!statusEl) return;
+
+      if (!formEndpoint || formEndpoint.includes('your-form-id')) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = 'Set your Formspree endpoint in the head meta tag to enable this form.';
+        return;
+      }
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn?.textContent || 'Send message';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+      }
+      statusEl.className = 'form-status';
+      statusEl.textContent = '';
+
+      try {
+        const response = await fetch(formEndpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (!response.ok) {
+          throw new Error('Request failed');
+        }
+
+        form.reset();
+        statusEl.className = 'form-status success';
+        statusEl.textContent = 'Thanks! Your message was sent.';
+      } catch (error) {
+        statusEl.className = 'form-status error';
+        statusEl.textContent = 'Could not send message right now. Try again in a minute.';
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+        }
+      }
+    });
 
     // ——— ROTATING TEXT (TYPEWRITER) ———
     const roles = [
