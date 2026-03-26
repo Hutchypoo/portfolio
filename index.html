@@ -1211,8 +1211,8 @@
       trackBetEvent();
     });
 
-    // GA4 revenue calculations expect ISO currency code in lowercase.
-    const BET_CURRENCY = 'usd';
+    // GA4 ecommerce "purchase" examples use ISO currency code like "USD".
+    const BET_CURRENCY = 'USD';
     const BET_VISIT_VALUE = 127.12;
     const BET_EVENT_VALUE = 1.92;
     let trackBetVisit = () => {};
@@ -1245,7 +1245,6 @@
               item_id: itemId,
               item_name: 'Friend bet',
               price: amount,
-              currency: BET_CURRENCY,
               quantity: 1
             }
           ]
