@@ -22,24 +22,6 @@
   <meta name="theme-color" content="#6366f1">
   <meta name="google-analytics-id" content="G-2P5JMXEL8Z">
   <meta name="formspree-endpoint" content="https://formspree.io/f/xpqozdvp">
-  <link rel="canonical" href="https://hutchy.dev/">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Hutch Steadman",
-    "url": "https://hutchy.dev",
-    "image": "https://i.imgur.com/xMoobv2.jpeg",
-    "jobTitle": "Full-Stack Developer",
-    "description": "Full-stack developer and UI/UX enthusiast crafting fast, accessible web experiences.",
-    "sameAs": [
-      "https://github.com/Hutchypoo",
-      "https://www.linkedin.com/in/hutchsteadman",
-      "https://x.com/lowkeyhutchy"
-    ]
-  }
-  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1226,8 +1208,14 @@
       document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
       toggle.innerHTML = isDark ? '&#9790;' : '&#9788;';
       localStorage.setItem('theme', isDark ? 'light' : 'dark');
-      trackEvent('theme_toggle', { theme: isDark ? 'light' : 'dark' });
+      trackBetEvent();
     });
+
+    const BET_CURRENCY = 'USD';
+    const BET_VISIT_VALUE = 127.12;
+    const BET_EVENT_VALUE = 1.92;
+    let trackBetVisit = () => {};
+    let trackBetEvent = () => {};
 
     const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content;
     if (analyticsId && analyticsId !== 'YOUR_GA_MEASUREMENT_ID') {
@@ -1237,46 +1225,38 @@
       document.head.appendChild(gaScript);
 
       window.dataLayer = window.dataLayer || [];
-      window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
       window.gtag('config', analyticsId);
-    }
 
-    // ——— ANALYTICS EVENTS ———
-    function trackEvent(eventName, params = {}) {
-      if (typeof window.gtag !== 'function') return;
-      window.gtag('event', eventName, params);
-    }
+      const makeBetTransactionId = () =>
+        `bet-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 
-    document.querySelectorAll('.hero-buttons a').forEach(button => {
-      button.addEventListener('click', () => {
-        trackEvent('hero_cta_click', {
-          cta_text: button.textContent?.trim() || 'unknown',
-          cta_target: button.getAttribute('href') || ''
+      const sendBetPurchase = (amount, itemId) => {
+        if (typeof window.gtag !== 'function') return;
+        window.gtag('event', 'purchase', {
+          transaction_id: makeBetTransactionId(),
+          affiliation: 'friend-bet',
+          value: amount,
+          currency: BET_CURRENCY,
+          items: [
+            {
+              item_id: itemId,
+              item_name: 'Friend bet',
+              price: amount,
+              quantity: 1
+            }
+          ]
         });
-      });
-    });
+      };
 
-    projectsGrid.addEventListener('click', (event) => {
-      const link = event.target.closest('a');
-      if (!link) return;
-      const card = link.closest('.project-card');
-      const projectName = card?.querySelector('h3')?.textContent?.trim() || 'unknown';
-      const isBuy = link.textContent?.toLowerCase().includes('buy');
-      trackEvent(isBuy ? 'project_buy_click' : 'project_link_click', {
-        project_name: projectName,
-        link_url: link.getAttribute('href') || ''
-      });
-    });
+      // Adds $127.12 to GA4 "Revenue" for each page visit.
+      trackBetVisit = () => sendBetPurchase(BET_VISIT_VALUE, 'bet-visit');
+      // Adds $1.92 for each interaction we track below.
+      trackBetEvent = () => sendBetPurchase(BET_EVENT_VALUE, 'bet-event');
 
-    socialsGrid.addEventListener('click', (event) => {
-      const link = event.target.closest('a.social-btn');
-      if (!link) return;
-      trackEvent('social_click', {
-        social_name: link.textContent?.trim() || 'unknown',
-        social_url: link.getAttribute('href') || ''
-      });
-    });
+      trackBetVisit();
+    }
 
     const form = document.getElementById('contact-form');
     const statusEl = document.getElementById('form-status');
@@ -1292,9 +1272,11 @@
       if (!formEndpoint || formEndpoint.includes('your-form-id')) {
         statusEl.className = 'form-status error';
         statusEl.textContent = 'Set your Formspree endpoint in the head meta tag to enable this form.';
+        trackBetEvent();
         return;
       }
 
+      trackBetEvent();
       const submitBtn = form.querySelector('button[type="submit"]');
       const originalBtnText = submitBtn?.textContent || 'Send message';
       if (submitBtn) {
@@ -1318,11 +1300,9 @@
         form.reset();
         statusEl.className = 'form-status success';
         statusEl.textContent = 'Thanks! Your message was sent.';
-        trackEvent('contact_form_submit', { status: 'success' });
       } catch (error) {
         statusEl.className = 'form-status error';
         statusEl.textContent = 'Could not send message right now. Try again in a minute.';
-        trackEvent('contact_form_submit', { status: 'error' });
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;
@@ -1384,49 +1364,25 @@
     // ——— MOBILE MENU ———
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      trackBetEvent();
+    });
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => navLinks.classList.remove('open'));
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        trackBetEvent();
+      });
+    });
+
+    // Track key outbound/CTA clicks for the friend-bet counters.
+    document.querySelectorAll('.project-card a, .hero-buttons a, .social-btn').forEach(el => {
+      el.addEventListener('click', () => trackBetEvent());
     });
 
     // ——— NAV HIGHLIGHT ON SCROLL ———
     const sections = document.querySelectorAll('section[id]');
     const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-
-    navAnchors.forEach(anchor => {
-      anchor.addEventListener('click', () => {
-        trackEvent('nav_click', {
-          link_text: anchor.textContent?.trim() || 'unknown',
-          link_target: anchor.getAttribute('href') || ''
-        });
-      });
-    });
-
-    const viewedSections = new Set();
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        const sectionId = entry.target.getAttribute('id');
-        if (!sectionId || viewedSections.has(sectionId)) return;
-        viewedSections.add(sectionId);
-        trackEvent('section_view', { section_id: sectionId });
-      });
-    }, { threshold: 0.35 });
-    sections.forEach(section => sectionObserver.observe(section));
-
-    const firedDepths = new Set();
-    const depthMarks = [25, 50, 75, 100];
-    window.addEventListener('scroll', () => {
-      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const depth = Math.round((window.scrollY / scrollable) * 100);
-      depthMarks.forEach(mark => {
-        if (depth >= mark && !firedDepths.has(mark)) {
-          firedDepths.add(mark);
-          trackEvent('scroll_depth', { percent: mark });
-        }
-      });
-    }, { passive: true });
 
     window.addEventListener('scroll', () => {
       let current = '';
@@ -1445,8 +1401,8 @@
       backToTop.classList.toggle('visible', window.scrollY > 500);
     });
     backToTop.addEventListener('click', () => {
-      trackEvent('back_to_top_click');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      trackBetEvent();
     });
 
     // ——— PARTICLES ———
