@@ -3,25 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hutch Steadman — Full-Stack Developer</title>
-  <meta name="description" content="Portfolio of Hutch Steadman — full-stack developer & UI/UX enthusiast building things that matter.">
+  <title>Hutch Steadman — Fortnite &amp; YouTube</title>
+  <meta name="description" content="Hutch Steadman's Fortnite and YouTube career: $24,770 earned in Fortnite and 128K subscribers on YouTube.">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236366f1'/><text x='50' y='68' font-size='50' font-family='system-ui' font-weight='800' text-anchor='middle' fill='white'>HS</text></svg>">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Hutch Steadman — Full-Stack Developer">
-  <meta property="og:description" content="Full-stack developer & UI/UX enthusiast crafting fast, accessible, and beautiful web experiences.">
+  <meta property="og:title" content="Hutch Steadman — Fortnite & YouTube">
+  <meta property="og:description" content="$24,770 earned in Fortnite. 128K subscribers on YouTube.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://hutchy.dev">
   <meta property="og:image" content="https://i.imgur.com/xMoobv2.jpeg">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Hutch Steadman — Full-Stack Developer">
-  <meta name="twitter:description" content="Full-stack developer & UI/UX enthusiast crafting fast, accessible, and beautiful web experiences.">
+  <meta name="twitter:title" content="Hutch Steadman — Fortnite & YouTube">
+  <meta name="twitter:description" content="$24,770 earned in Fortnite. 128K subscribers on YouTube.">
   <meta name="twitter:image" content="https://i.imgur.com/xMoobv2.jpeg">
   <meta name="theme-color" content="#6366f1">
-  <meta name="google-analytics-id" content="G-2P5JMXEL8Z">
-  <meta name="formspree-endpoint" content="https://formspree.io/f/xpqozdvp">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -442,67 +440,64 @@
       margin-bottom: 3rem;
     }
 
-    /* ——— SKILLS ——— */
-    .skills-grid {
+    /* ——— STATS ——— */
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
     }
 
-    .skill-card {
+    .stat-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 2rem;
       text-align: center;
       transition: all 0.25s;
     }
 
-    .skill-card:hover {
+    .stat-card:hover {
       border-color: var(--accent);
       transform: translateY(-3px);
       box-shadow: var(--shadow-md);
     }
 
-    .skill-icon {
-      margin-bottom: 0.75rem;
+    .stat-icon {
+      margin-bottom: 1rem;
       display: flex;
       justify-content: center;
       align-items: center;
       color: var(--accent);
     }
 
-    .skill-name {
-      font-weight: 600;
-      font-size: 0.9rem;
-      margin-bottom: 0.85rem;
+    .stat-number {
+      font-size: clamp(2.5rem, 6vw, 3.25rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--accent), #ec4899);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-variant-numeric: tabular-nums;
     }
 
-    .skill-level {
-      font-size: 0.8rem;
+    .stat-name {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-top: 0.5rem;
+    }
+
+    .stat-note {
+      font-size: 0.88rem;
       color: var(--text-muted);
-      margin-bottom: 0.55rem;
+      margin-top: 0.25rem;
     }
 
-    .skill-bar {
-      height: 8px;
-      width: 100%;
-      background: rgba(148, 163, 184, 0.18);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .skill-fill {
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--accent), #ec4899);
-      box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
-    }
-
-    /* ——— PROJECTS ——— */
+    /* ——— CAREER ——— */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
 
@@ -568,7 +563,6 @@
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      margin-bottom: 1.25rem;
     }
 
     .project-tags span {
@@ -580,204 +574,21 @@
       font-weight: 600;
     }
 
-    .project-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--accent);
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-decoration: none;
-      transition: gap 0.2s;
-    }
-
-    .project-link:hover {
-      gap: 0.7rem;
-    }
-
-    .project-links {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-sm {
-      padding: 0.5rem 1.1rem;
-      font-size: 0.85rem;
-      border-radius: 8px;
-    }
-
-    /* ——— CONTACT ——— */
-    #contact {
+    /* ——— SOCIALS ——— */
+    #socials {
       text-align: center;
     }
 
-    #contact .section-desc {
+    #socials .section-desc {
       margin-left: auto;
       margin-right: auto;
     }
 
-    .contact-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    .contact-form-wrap {
-      max-width: 700px;
-      margin: 0 auto 1.5rem;
-      text-align: left;
-    }
-
-    .contact-form {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem;
-      box-shadow: var(--shadow-sm);
-      display: grid;
-      gap: 0.85rem;
-    }
-
-    .contact-form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.85rem;
-    }
-
-    .contact-form label {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      margin-bottom: 0.3rem;
-      display: inline-block;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      color: var(--text);
-      border-radius: 10px;
-      padding: 0.72rem 0.8rem;
-      font: inherit;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    .contact-form input:focus,
-    .contact-form textarea:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-light);
-    }
-
-    .contact-form textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
-
-    .form-status {
-      min-height: 1.2rem;
-      font-size: 0.86rem;
-      color: var(--text-muted);
-    }
-
-    .form-status.success {
-      color: #16a34a;
-    }
-
-    .form-status.error {
-      color: #dc2626;
-    }
-
-    .contact-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.25rem 2rem;
-      text-decoration: none;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      transition: all 0.25s;
-      min-width: 200px;
-    }
-
-    .contact-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .contact-card .icon {
-      font-size: 1.5rem;
-    }
-
-    .contact-card .label {
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .contact-card .value {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    /* ——— AGE TICKER ——— */
-    .age-ticker {
-      margin-top: 3rem;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .age-unit {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1rem 1.25rem;
-      min-width: 120px;
-      text-align: center;
-      transition: all 0.25s;
-    }
-
-    .age-unit:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
-    }
-
-    .age-unit .number {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--accent);
-      font-variant-numeric: tabular-nums;
-      letter-spacing: -0.02em;
-    }
-
-    .age-unit .label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-muted);
-      margin-top: 0.25rem;
-    }
-
-    /* ——— SOCIALS ——— */
     .socials-grid {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin-top: 1rem;
     }
 
     .social-btn {
@@ -839,11 +650,6 @@
       color: var(--text-muted);
       font-size: 0.85rem;
       transition: border-color 0.3s;
-    }
-
-    footer a {
-      color: var(--accent);
-      text-decoration: none;
     }
 
     /* ——— PAGE LOAD ——— */
@@ -920,15 +726,8 @@
         padding: 3.5rem 1.5rem;
       }
 
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .contact-form-row {
+      .projects-grid,
+      .stats-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -946,9 +745,9 @@
       <a href="#" class="logo">hutchy<span>.dev</span></a>
       <button class="mobile-menu-btn" aria-label="Toggle menu">&#9776;</button>
       <ul class="nav-links">
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#stats">Stats</a></li>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#socials">Socials</a></li>
         <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
       </ul>
     </div>
@@ -959,66 +758,38 @@
     <canvas id="particles"></canvas>
     <div class="hero-content">
       <div class="hero-photo reveal" id="hero-photo"></div>
-      <div class="hero-badge reveal reveal-delay-1">Available for work</div>
+      <div class="hero-badge reveal reveal-delay-1">Fortnite &amp; YouTube</div>
       <h1 class="reveal reveal-delay-2">Hi, I'm<br><span class="gradient">Hutch Steadman</span></h1>
       <p class="reveal reveal-delay-3 hero-subtitle"><span id="rotating-text"></span></p>
       <div class="hero-buttons reveal">
-        <a href="#projects" class="btn btn-primary">View my work &darr;</a>
-        <a href="#contact" class="btn btn-secondary">Get in touch</a>
+        <a href="#career" class="btn btn-primary">See my career &darr;</a>
+        <a href="#socials" class="btn btn-secondary">Find me online</a>
       </div>
     </div>
   </section>
 
-  <!-- SKILLS -->
-  <section id="skills">
-    <p class="section-label reveal">What I work with</p>
-    <h2 class="section-title reveal">Skills & Technologies</h2>
-    <p class="section-desc reveal">I build end-to-end products with modern tools across the frontend, backend, and everything in between.</p>
-    <div class="skills-grid" id="skills-grid"></div>
+  <!-- STATS -->
+  <section id="stats">
+    <p class="section-label reveal">By the numbers</p>
+    <h2 class="section-title reveal">Career Stats</h2>
+    <p class="section-desc reveal">What I put up in Fortnite and on YouTube.</p>
+    <div class="stats-grid" id="stats-grid"></div>
   </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <p class="section-label reveal">Selected work</p>
-    <h2 class="section-title reveal">Projects</h2>
-    <p class="section-desc reveal">A few things I've built recently. Each one taught me something new.</p>
-    <div class="projects-grid" id="projects-grid"></div>
+  <!-- CAREER -->
+  <section id="career">
+    <p class="section-label reveal">My story</p>
+    <h2 class="section-title reveal">Career</h2>
+    <p class="section-desc reveal">How it went, the highs and the lows.</p>
+    <div class="projects-grid" id="career-grid"></div>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <p class="section-label reveal">Get in touch</p>
-    <h2 class="section-title reveal">Let's Build Something Together</h2>
-    <p class="section-desc reveal">I'm always open to discussing new projects, creative ideas, or opportunities to be part of something great.</p>
-    <div class="contact-form-wrap reveal">
-      <form id="contact-form" class="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
-        <div class="contact-form-row">
-          <div>
-            <label for="contact-name">Name</label>
-            <input id="contact-name" name="name" type="text" autocomplete="name" required>
-          </div>
-          <div>
-            <label for="contact-email">Email</label>
-            <input id="contact-email" name="email" type="email" autocomplete="email" required>
-          </div>
-        </div>
-        <div>
-          <label for="contact-message">Message</label>
-          <textarea id="contact-message" name="message" required></textarea>
-        </div>
-        <input type="text" name="_gotcha" style="display:none">
-        <button type="submit" class="btn btn-primary">Send message</button>
-        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
-      </form>
-    </div>
-    <div class="contact-links" id="contact-links"></div>
-
-    <div class="socials-section reveal">
-      <p class="section-label" style="margin-top:3rem;">Find me online</p>
-      <div class="socials-grid" id="socials-grid"></div>
-    </div>
-
-    <div class="age-ticker reveal" id="age-ticker"></div>
+  <!-- SOCIALS -->
+  <section id="socials">
+    <p class="section-label reveal">Find me online</p>
+    <h2 class="section-title reveal">Follow Along</h2>
+    <p class="section-desc reveal">Catch my streams on Twitch and updates on X.</p>
+    <div class="socials-grid reveal" id="socials-grid"></div>
   </section>
 
   <footer>
@@ -1059,54 +830,54 @@
     }
 
     // ——— DATA ———
-    const skills = [
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968509.png" width="32" height="32" alt="JavaScript" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "JavaScript", level: 94 },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968566.png" width="32" height="32" alt="TypeScript" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "TypeScript", level: 88 },
-      { icon: '<img src="https://img.icons8.com/?size=100&id=35989&format=png&color=000000" width="32" height="32" alt="React" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "React", level: 91 },
-      { icon: '<img src="https://img.icons8.com/?size=100&id=FQlr_bFSqEdG&format=png&color=000000" width="32" height="32" alt="Node.js" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Node.js", level: 86 },
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 255"><path d="M126.916.072c-64.832 0-60.784 28.115-60.784 28.115l.072 29.128h61.868v8.745H41.631S.145 61.355.145 126.77c0 65.417 36.21 63.097 36.21 63.097h21.61v-30.356s-1.165-36.21 35.632-36.21h61.362s34.475.557 34.475-33.319V33.97S194.67.072 126.916.072ZM92.802 19.66a11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13 11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.13Z"/><path d="M128.757 254.126c64.832 0 60.784-28.115 60.784-28.115l-.072-29.127H127.6v-8.745h86.441s41.486 4.705 41.486-60.712c0-65.416-36.21-63.096-36.21-63.096h-21.61v30.355s1.165 36.21-35.632 36.21h-61.362s-34.475-.557-34.475 33.32v56.013s-5.235 33.897 62.518 33.897Zm34.114-19.586a11.12 11.12 0 0 1-11.13-11.13 11.12 11.12 0 0 1 11.13-11.131 11.12 11.12 0 0 1 11.13 11.13 11.12 11.12 0 0 1-11.13 11.13Z"/></svg>', name: "Python", level: 89 },
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0M4.882 1.731a.48.48 0 0 1 .14.291.487.487 0 0 1-.371.486 6.5 6.5 0 0 0-1.19.62A7 7 0 0 1 4.882 1.73m6.24.003a7.002 7.002 0 0 1 1.41 1.398 6.5 6.5 0 0 0-1.19-.62.487.487 0 0 1-.371-.486.48.48 0 0 1 .14-.291zM8 3a5 5 0 1 1 0 10A5 5 0 0 1 8 3"/></svg>', name: "AWS", level: 72 },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968561.png" width="32" height="32" alt="Swift" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Swift", level: 66 },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968504.png" width="32" height="32" alt="Java" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "Java", level: 78 },
-      { icon: '<img src="https://cdn-icons-png.flaticon.com/512/5968/5968571.png" width="32" height="32" alt="Visual Studio" style="filter: brightness(0) invert(0.4) sepia(1) saturate(5) hue-rotate(210deg);" />', name: "VS Code", level: 90 },
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16"><path d="M15.698 7.287 8.712.302a1.03 1.03 0 0 0-1.457 0l-1.45 1.45 1.84 1.84a1.223 1.223 0 0 1 1.55 1.56l1.773 1.774a1.224 1.224 0 1 1-.733.693L8.535 5.918v4.27a1.229 1.229 0 1 1-1.008-.036V5.851a1.224 1.224 0 0 1-.664-1.608L5.093 2.473l-4.79 4.79a1.03 1.03 0 0 0 0 1.457l6.986 6.986a1.03 1.03 0 0 0 1.457 0l6.953-6.953a1.031 1.031 0 0 0 0-1.457z"/></svg>', name: "Git", level: 93 },
-    ];
-
-    const projects = [
+    const stats = [
       {
-        title: "Aqua External",
-        desc: "The Best Undetected External Injector For Roblox With Aimbot, ESP, and more | Currently Private Repository Because We Spent A Ton Of Time On It",
-        tags: ["React", "PWA", "API"],
-        link: "https://github.com/Hutchypoo/Aqua-External",
-        buyLink: "https://aquaexternal.store"
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M2.5.5A.5.5 0 0 1 3 0h10a.5.5 0 0 1 .5.5q0 .807-.034 1.536a3 3 0 1 1-1.133 5.89c-.79 1.865-1.878 2.777-2.833 3.011v2.173l1.425.356c.194.048.377.135.537.255L13.3 15.1a.5.5 0 0 1-.3.9H3a.5.5 0 0 1-.3-.9l1.838-1.379c.16-.12.343-.207.537-.255L6.5 13.11v-2.173c-.955-.234-2.043-1.146-2.833-3.012a3 3 0 1 1-1.132-5.89A33 33 0 0 1 2.5.5m.099 2.54a2 2 0 0 0 .72 3.935c-.333-1.05-.588-2.346-.72-3.935m10.083 3.935a2 2 0 0 0 .72-3.935c-.133 1.59-.388 2.885-.72 3.935"/></svg>',
+        number: "$24,770",
+        name: "Earned in Fortnite",
+        note: "Total winnings before my account got hacked"
       },
       {
-        title: "Hutch AV",
-        desc: "The Leading Anti-Virus Software For Windows 10 And 11. Proven To Be 17% More Effective Than Avast, AVG, and Norton",
-        tags: ["Python", "React", "Node.js"],
-        link: "https://github.com/Hutchypoo/Hutch-AV"
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" viewBox="0 0 16 16"><path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/></svg>',
+        number: "128K",
+        name: "YouTube Subscribers",
+        note: "Peak subscriber count before the channel was banned"
       }
     ];
 
-    const contacts = [
-      { icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/></svg>', label: "GitHub", value: "Hutchypoo", href: "https://github.com/Hutchypoo" },
+    const career = [
+      {
+        title: "Fortnite Career",
+        desc: "Competed in Fortnite and earned $24,770 in total winnings. Later on my account got hacked and I lost access to it.",
+        tags: ["Competitive", "$24,770 earned", "Account hacked"]
+      },
+      {
+        title: "YouTube Career",
+        desc: "Made Fortnite content and grew my channel to 128K subscribers. The channel got banned because I signed up before I was old enough.",
+        tags: ["Fortnite content", "128K subscribers", "Channel banned"]
+      },
+      {
+        title: "What's Next",
+        desc: "Starting fresh and building back up. Follow my socials to see what I do next.",
+        tags: ["Coming soon"]
+      }
     ];
 
     // ——— RENDER ———
-    const skillsGrid = document.getElementById('skills-grid');
-    skills.forEach((s, i) => {
+    const statsGrid = document.getElementById('stats-grid');
+    stats.forEach((s, i) => {
       const el = document.createElement('div');
-      el.className = `skill-card reveal ${i < 5 ? `reveal-delay-${(i % 3) + 1}` : ''}`;
+      el.className = `stat-card reveal reveal-delay-${i + 1}`;
       el.innerHTML = `
-        <span class="skill-icon">${s.icon}</span>
-        <span class="skill-name">${s.name}</span>
-        <div class="skill-level">${s.level}%</div>
-        <div class="skill-bar"><div class="skill-fill" style="width: ${s.level}%"></div></div>`;
-      skillsGrid.appendChild(el);
+        <div class="stat-icon">${s.icon}</div>
+        <div class="stat-number">${s.number}</div>
+        <div class="stat-name">${s.name}</div>
+        <div class="stat-note">${s.note}</div>`;
+      statsGrid.appendChild(el);
     });
 
-    const projectsGrid = document.getElementById('projects-grid');
-    projects.forEach((p, i) => {
+    const careerGrid = document.getElementById('career-grid');
+    career.forEach((p, i) => {
       const el = document.createElement('div');
       el.className = `project-card reveal reveal-delay-${i + 1}`;
       el.innerHTML = `
@@ -1114,35 +885,15 @@
           <h3>${p.title}</h3>
           <p>${p.desc}</p>
           <div class="project-tags">${p.tags.map(t => `<span>${t}</span>`).join('')}</div>
-          <div class="project-links">
-            <a class="project-link" href="${p.link}" target="_blank" rel="noopener noreferrer">View on GitHub &rarr;</a>
-            ${p.buyLink ? `<a class="btn btn-primary btn-sm" href="${p.buyLink}" target="_blank" rel="noopener noreferrer">Buy Here</a>` : ''}
-          </div>
         </div>`;
-      projectsGrid.appendChild(el);
-    });
-
-    const contactLinks = document.getElementById('contact-links');
-    contacts.forEach((c, i) => {
-      const el = document.createElement('a');
-      el.className = `contact-card reveal reveal-delay-${i + 1}`;
-      el.href = c.href;
-      el.target = '_blank';
-      el.rel = 'noopener noreferrer';
-      el.innerHTML = `
-        <span class="icon">${c.icon}</span>
-        <div>
-          <div class="label">${c.label}</div>
-          <div class="value">${c.value}</div>
-        </div>`;
-      contactLinks.appendChild(el);
+      careerGrid.appendChild(el);
     });
 
     // ——— SOCIALS ———
     const socials = [
+      { name: "Twitch", href: "https://twitch.tv/nglhutchy", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142z"/><path d="M11.857 3.143h-1.143V6.57h1.143zm-3.143 0H7.571V6.57h1.143z"/></svg>' },
       { name: "X", href: "https://x.com/lowkeyhutchy", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865z"/></svg>' },
       { name: "Instagram (Private)", href: "https://instagram.com/hutchsteadman", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/></svg>' },
-      { name: "Twitch", href: "https://twitch.tv/nglhutchy", icon: '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M3.857 0 1 2.857v10.286h3.429V16l2.857-2.857H9.57L14.714 8V0zm9.714 7.429-2.285 2.285H9l-2 2v-2H4.429V1.143h9.142z"/><path d="M11.857 3.143h-1.143V6.57h1.143zm-3.143 0H7.571V6.57h1.143z"/></svg>' },
     ];
 
     const socialsGrid = document.getElementById('socials-grid');
@@ -1155,33 +906,6 @@
       el.innerHTML = `${s.icon} ${s.name}`;
       socialsGrid.appendChild(el);
     });
-
-    // ——— AGE TICKER ———
-    const birthday = new Date(2012, 5, 30, 15, 27, 0);
-    const ageContainer = document.getElementById('age-ticker');
-
-    function updateAge() {
-      const now = new Date();
-      const diff = now - birthday;
-
-      const seconds = Math.floor(diff / 1000);
-      const minutes = Math.floor(diff / 60000);
-      const hours = Math.floor(diff / 3600000);
-      const days = Math.floor(diff / 86400000);
-      const months = (now.getFullYear() - birthday.getFullYear()) * 12 + (now.getMonth() - birthday.getMonth());
-      const years = now.getFullYear() - birthday.getFullYear() - (now < new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate(), 15, 27) ? 1 : 0);
-
-      ageContainer.innerHTML = `
-        <div class="age-unit"><div class="number">${years.toLocaleString()}</div><div class="label">Years</div></div>
-        <div class="age-unit"><div class="number">${months.toLocaleString()}</div><div class="label">Months</div></div>
-        <div class="age-unit"><div class="number">${days.toLocaleString()}</div><div class="label">Days</div></div>
-        <div class="age-unit"><div class="number">${hours.toLocaleString()}</div><div class="label">Hours</div></div>
-        <div class="age-unit"><div class="number">${minutes.toLocaleString()}</div><div class="label">Minutes</div></div>
-        <div class="age-unit"><div class="number">${seconds.toLocaleString()}</div><div class="label">Seconds</div></div>`;
-    }
-
-    updateAge();
-    setInterval(updateAge, 1000);
 
     // ——— SCROLL REVEAL ———
     const observer = new IntersectionObserver((entries) => {
@@ -1197,7 +921,8 @@
 
     // ——— THEME TOGGLE ———
     const toggle = document.getElementById('theme-toggle');
-    const stored = localStorage.getItem('theme');
+    let stored = null;
+    try { stored = localStorage.getItem('theme'); } catch (e) {}
     if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.setAttribute('data-theme', 'dark');
       toggle.innerHTML = '&#9788;';
@@ -1207,123 +932,17 @@
       const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
       document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
       toggle.innerHTML = isDark ? '&#9790;' : '&#9788;';
-      localStorage.setItem('theme', isDark ? 'light' : 'dark');
-      trackBetEvent();
-    });
-
-    // GA4 ecommerce "purchase" examples use ISO currency code like "USD".
-    const BET_CURRENCY = 'USD';
-    const BET_VISIT_VALUE = 127.12;
-    const BET_EVENT_VALUE = 1.92;
-    let trackBetVisit = () => {};
-    let trackBetEvent = () => {};
-
-    const analyticsId = document.querySelector('meta[name="google-analytics-id"]')?.content;
-    if (analyticsId && analyticsId !== 'YOUR_GA_MEASUREMENT_ID') {
-      const gaScript = document.createElement('script');
-      gaScript.async = true;
-      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
-      document.head.appendChild(gaScript);
-
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
-      window.gtag('js', new Date());
-      window.gtag('config', analyticsId);
-
-      const makeBetTransactionId = () =>
-        `bet-${Date.now()}-${Math.random().toString(16).slice(2)}`;
-
-      const sendBetPurchase = (amount, itemId) => {
-        if (typeof window.gtag !== 'function') return;
-        window.gtag('event', 'purchase', {
-          transaction_id: makeBetTransactionId(),
-          affiliation: 'friend-bet',
-          value: amount,
-          currency: BET_CURRENCY,
-          items: [
-            {
-              item_id: itemId,
-              item_name: 'Friend bet',
-              price: amount,
-              quantity: 1
-            }
-          ]
-        });
-      };
-
-      // Adds $127.12 to GA4 "Revenue" for each page visit.
-      trackBetVisit = () => sendBetPurchase(BET_VISIT_VALUE, 'bet-visit');
-      // Adds $1.92 for each interaction we track below.
-      trackBetEvent = () => sendBetPurchase(BET_EVENT_VALUE, 'bet-event');
-
-      trackBetVisit();
-    }
-
-    const form = document.getElementById('contact-form');
-    const statusEl = document.getElementById('form-status');
-    const formEndpoint = document.querySelector('meta[name="formspree-endpoint"]')?.content || '';
-    if (form && formEndpoint) {
-      form.action = formEndpoint;
-    }
-
-    form?.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (!statusEl) return;
-
-      if (!formEndpoint || formEndpoint.includes('your-form-id')) {
-        statusEl.className = 'form-status error';
-        statusEl.textContent = 'Set your Formspree endpoint in the head meta tag to enable this form.';
-        trackBetEvent();
-        return;
-      }
-
-      trackBetEvent();
-      const submitBtn = form.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn?.textContent || 'Send message';
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-      }
-      statusEl.className = 'form-status';
-      statusEl.textContent = '';
-
-      try {
-        const response = await fetch(formEndpoint, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(form)
-        });
-
-        if (!response.ok) {
-          throw new Error('Request failed');
-        }
-
-        form.reset();
-        statusEl.className = 'form-status success';
-        statusEl.textContent = 'Thanks! Your message was sent.';
-      } catch (error) {
-        statusEl.className = 'form-status error';
-        statusEl.textContent = 'Could not send message right now. Try again in a minute.';
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalBtnText;
-        }
-      }
+      try { localStorage.setItem('theme', isDark ? 'light' : 'dark'); } catch (e) {}
     });
 
     // ——— ROTATING TEXT (TYPEWRITER) ———
     const roles = [
-      "Full-Stack Developer",
-      "AI Programmer",
-      "AI Trainer",
-      "UI Designer",
-      "UX Designer",
-      "Python",
-      "C++",
-      "React",
-      "Node.js",
-      "JavaScript"
+      "Fortnite Player",
+      "YouTuber",
+      "Content Creator",
+      "Competitive Gamer",
+      "$24,770 Earned",
+      "128K Subscribers"
     ];
     const rotatingEl = document.getElementById('rotating-text');
     let roleIndex = 0;
@@ -1365,20 +984,9 @@
     // ——— MOBILE MENU ———
     const menuBtn = document.querySelector('.mobile-menu-btn');
     const navLinks = document.querySelector('.nav-links');
-    menuBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      trackBetEvent();
-    });
+    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        trackBetEvent();
-      });
-    });
-
-    // Track key outbound/CTA clicks for the friend-bet counters.
-    document.querySelectorAll('.project-card a, .hero-buttons a, .social-btn').forEach(el => {
-      el.addEventListener('click', () => trackBetEvent());
+      link.addEventListener('click', () => navLinks.classList.remove('open'));
     });
 
     // ——— NAV HIGHLIGHT ON SCROLL ———
@@ -1403,7 +1011,6 @@
     });
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      trackBetEvent();
     });
 
     // ——— PARTICLES ———
